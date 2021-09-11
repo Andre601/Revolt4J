@@ -11,6 +11,7 @@ public class UserImpl implements User{
     protected final String id;
     protected String name;
     protected int badges;
+    protected Avatar avatar;
     
     public UserImpl(Revolt4J api, String id){
         this.api = api;
@@ -19,13 +20,27 @@ public class UserImpl implements User{
     }
     
     @Override
+    @NotNull
     public String getId(){
         return id;
     }
     
     @Override
+    @NotNull
     public String getName(){
         return name;
+    }
+    
+    @Override
+    @NotNull
+    public Avatar getAvatar(){
+        return avatar;
+    }
+    
+    @Override
+    @NotNull
+    public String getAvatarUrl(){
+        return getAvatar().getUrl();
     }
     
     public UserImpl setName(@NotNull String name){
@@ -36,5 +51,35 @@ public class UserImpl implements User{
     public UserImpl setBadges(int badges){
         this.badges = badges;
         return this;
+    }
+    
+    public UserImpl setAvatar(Avatar avatar){
+        this.avatar = avatar;
+        return this;
+    }
+    
+    public static class AvatarImpl implements Avatar{
+        
+        private final Revolt4J api;
+        
+        private final String id;
+        
+        public AvatarImpl(Revolt4J api, String id){
+            this.api = api;
+            
+            this.id = id;
+        }
+        
+        @Override
+        @NotNull
+        public String getId(){
+            return id;
+        }
+    
+        @Override
+        @NotNull
+        public String getUrl(){
+            return api.getFileUrl() + "/avatars/" + getId();
+        }
     }
 }

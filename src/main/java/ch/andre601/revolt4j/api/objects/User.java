@@ -1,44 +1,64 @@
 package ch.andre601.revolt4j.api.objects;
 
-import ch.andre601.revolt4j.api.Revolt4J;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
-
+/**
+ * Interface representing a Revolt User.
+ */
 public interface User{
     
+    /**
+     * The ID of the User.
+     * <br>The ID will always be 26 characters long and will be alphanumeric.
+     * 
+     * @return ID of the User.
+     */
+    @NotNull
     String getId();
     
+    /**
+     * The Displayed name of the user.
+     * <br>The username will never be less than 2 and not more than 32 characters long.
+     * 
+     * @return Name of the User.
+     */
+    @NotNull
     String getName();
     
-    class Avatar{
-        private final Revolt4J api;
-        
-        private final String id;
-        private final String name;
-        private final String contentType;
-        
-        public Avatar(Revolt4J api, String id, String name, String contentType){
-            this.api = api;
-            
-            this.id = id;
-            this.name = name;
-            this.contentType = contentType;
-        }
+    /**
+     * The {@link Avatar User's Avatar}.
+     * <br>If you want to only get the Link for the Avatar should you use {@link #getAvatarUrl()} instead.
+     * 
+     * @return Avatar instance of the User.
+     */
+    @NotNull
+    Avatar getAvatar();
     
-        public String getId(){
-            return id;
-        }
+    /**
+     * Convenience method to directly get the avatar.
+     * <br>This is equal to doing  <code>{@link #getAvatar()}.getUrl()</code>
+     * 
+     * @return The URL for the User's avatar.
+     */
+    @NotNull
+    String getAvatarUrl();
     
-        public String getName(){
-            return name;
-        }
+    interface Avatar{
     
-        public String getContentType(){
-            return contentType;
-        }
+        /**
+         * The ID of the User's avatar.
+         * 
+         * @return ID of the Avatar.
+         */
+        @NotNull
+        String getId();
     
-        public String getUrl(){
-            return api.getFileUrl() + getId() + "/" + getName() + "." + getContentType();
-        }
+        /**
+         * The URL used for the User's avatar.
+         * 
+         * @return URL of the avatar.
+         */
+        @NotNull
+        String getUrl();
     }
 }

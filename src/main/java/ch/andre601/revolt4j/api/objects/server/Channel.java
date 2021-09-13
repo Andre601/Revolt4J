@@ -2,16 +2,20 @@ package ch.andre601.revolt4j.api.objects.server;
 
 import ch.andre601.revolt4j.api.objects.properties.Mentionable;
 import ch.andre601.revolt4j.api.objects.properties.Snowflake;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * A generic Server Channel.
- * <br>One instance can be both  a Text or Voice channel. Use {@link #getType()}, or
- * directly use a TextChannel or VoiceChannel instance instead.
+ * 
+ * <p>The Channel instance can be both a {@link TextChannel} or {@link VoiceChannel}.
+ * <br>To find out which you have can you check the {@link #getType() ChannelType} the Channel will have.
  */
 public interface Channel extends Mentionable, Snowflake{
     
+    @NotNull
     String getName();
     
+    @NotNull
     ChannelType getType();
     
     enum ChannelType{

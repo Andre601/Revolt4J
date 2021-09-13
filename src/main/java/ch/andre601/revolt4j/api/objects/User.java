@@ -1,20 +1,13 @@
 package ch.andre601.revolt4j.api.objects;
 
+import ch.andre601.revolt4j.api.objects.properties.Mentionable;
+import ch.andre601.revolt4j.api.objects.properties.Snowflake;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Interface representing a Revolt User.
  */
-public interface User{
-    
-    /**
-     * The ID of the User.
-     * <br>The ID will always be 26 characters long and will be alphanumeric.
-     * 
-     * @return ID of the User.
-     */
-    @NotNull
-    String getId();
+public interface User extends Snowflake, Mentionable{
     
     /**
      * The Displayed name of the user.

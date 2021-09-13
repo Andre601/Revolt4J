@@ -1,5 +1,7 @@
 package ch.andre601.revolt4j.api;
 
+import org.jetbrains.annotations.NotNull;
+
 public interface Revolt4J{
     
     enum Status{
@@ -62,4 +64,6 @@ public interface Revolt4J{
     void setGatewayUrl(String gatewayUrl);
     
     void setStatus(Status status);
+    
+    void addEventListeners(@NotNull Object... listeners);
 }

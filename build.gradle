@@ -24,5 +24,7 @@ dependencies {
     api 'com.squareup.okhttp3:okhttp:3.13.0'
     
     api 'org.json:json:20210307'
+    
+    api 'org.apache.commons:commons-collections4:4.1'
 }
 

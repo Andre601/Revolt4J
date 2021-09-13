@@ -3,7 +3,9 @@ package ch.andre601.revolt4j.api.objects.properties;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Interface for objects to implement, that all have a guaranteed unique ID.
+ * Marks a snowflake entity. Snowflake entities have unique IDs that will not appear in any other object on revolt,
+ * no matter the type or time.
+ * <br>This allows you to uniquely identify them.
  */
 public interface Snowflake{
     

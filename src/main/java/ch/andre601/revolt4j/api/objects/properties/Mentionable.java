@@ -1,7 +1,8 @@
 package ch.andre601.revolt4j.api.objects.properties;
 
 /**
- * Objects inheriting or extending this Interface can be mentioned within the Revolt Client.
+ * Marks an object as Mentionable. Mentionable objects can be mentioned in the client.
+ * <br>Common examples of mentionable objects are Users or channels.
  */
 public interface Mentionable{
     

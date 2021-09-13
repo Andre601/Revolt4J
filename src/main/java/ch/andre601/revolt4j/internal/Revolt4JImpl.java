@@ -2,12 +2,19 @@ package ch.andre601.revolt4j.internal;
 
 import ch.andre601.revolt4j.api.Revolt4J;
 import ch.andre601.revolt4j.internal.utils.AuthConfig;
+import ch.andre601.revolt4j.internal.utils.logging.Revolt4JLogger;
+import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
 
 import javax.security.auth.login.LoginException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Revolt4JImpl implements Revolt4J{
+    
+    public static final Logger LOG = Revolt4JLogger.getLogger(Revolt4J.class);
     
     protected Status status = Status.STARTING;
     
@@ -16,6 +23,7 @@ public class Revolt4JImpl implements Revolt4J{
     protected String fileUrl = null;
     protected String proxyUrl = null;
     protected String voiceUrl = null;
+    protected List<Object> listeners = new ArrayList<>();
     
     protected final AuthConfig authConfig;
     protected WebsocketHandler handler;
@@ -62,6 +70,11 @@ public class Revolt4JImpl implements Revolt4J{
     @Override
     public void setGatewayUrl(String gatewayUrl){
         this.gatewayUrl = gatewayUrl;
+    }
+    
+    @Override
+    public void addEventListeners(@NotNull Object... listsners){
+        
     }
     
     public Revolt4JImpl setWebsocketUrl(String websocketUrl){

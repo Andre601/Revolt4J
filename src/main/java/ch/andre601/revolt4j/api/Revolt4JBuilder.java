@@ -64,6 +64,8 @@ public class Revolt4JBuilder{
      */
     public Revolt4J build() throws LoginException{
         Revolt4JImpl revolt4J = new Revolt4JImpl(new AuthConfig(token));
+        listeners.forEach(Revolt4J::add);
+        
         revolt4J.login();
         return revolt4J;
     }

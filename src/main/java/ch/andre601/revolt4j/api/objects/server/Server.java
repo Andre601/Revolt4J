@@ -7,10 +7,17 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 /**
- * Instance of a Revolt Server.
+ * A Revolt Server.
+ * 
+ * <p>The Server is a place containing TextChannels, VoiceChannels, Roles and other Server Members.
  */
 public interface Server extends Snowflake{
     
+    /**
+     * The unique ID the server has.
+     * 
+     * @return The Server's ID.
+     */
     @NotNull
     String getId();
     

@@ -1,4 +1,4 @@
-package ch.andre601.revolt4j.internal.utils.events;
+package ch.andre601.revolt4j.internal.utils.event;
 
 import ch.andre601.revolt4j.api.event.BaseEvent;
 import ch.andre601.revolt4j.api.utils.event.EventManager;

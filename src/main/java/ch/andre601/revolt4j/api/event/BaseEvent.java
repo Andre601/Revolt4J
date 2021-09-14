@@ -2,6 +2,7 @@ package ch.andre601.revolt4j.api.event;
 
 import ch.andre601.revolt4j.api.Revolt4J;
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONObject;
 
 /**
  * The most basic event in Revold4J.
@@ -28,4 +29,7 @@ public interface BaseEvent{
     
     @NotNull
     Revolt4J getRevolt4J();
+    
+    @NotNull
+    JSONObject getJson();
 }

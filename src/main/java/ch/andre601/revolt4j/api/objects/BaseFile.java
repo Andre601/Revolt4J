@@ -56,7 +56,7 @@ public interface BaseFile extends Snowflake{
      *
      * @return Non-null String representing the file name with optional file extension.
      * 
-     * @see #getFileName() getFileName()
+     * @see #getFileName() String: getFileName()
      */
     @NotNull
     String getFileName(boolean withExtension);

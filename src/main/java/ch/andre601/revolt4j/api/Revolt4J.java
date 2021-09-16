@@ -4,15 +4,6 @@ import org.jetbrains.annotations.NotNull;
 
 public interface Revolt4J{
     
-    enum Status{
-        STARTING,
-        CONNECTING,
-        LOGIN,
-        CONNECTED,
-        DISCONNECTED,
-        CONNECT_TO_WEBSOCKET
-    }
-    
     /**
      * The current Gateway URL the Bot is connected to.
      * <br>By default is this https://api.revolt.chat but can be changed using the
@@ -24,30 +15,37 @@ public interface Revolt4J{
     
     /**
      * Gives the Websocket URL that is used.
+     * <br>The Websocket URL is retrieved when connecting to the {@link #getGatewayUrl() API} for the first time.
      * 
      * @return The currently used Websocket URL.
      */
     String getWebsocketUrl();
     
     /**
-     * Returns the URL used for files uploaded to revolt.
-     * <br>The default URL is https://autumn.revolt.chat/
+     * The URL used to display files.
+     * 
+     * <p>The URL is retrieved when connecting to the RevoltAPI for the first time and is https://autumn.revolt.chat
+     * for the default Revolt App.
      * 
      * @return URL used for files.
      */
     String getFileUrl();
     
     /**
-     * Returns the URL used for the proxy.
-     * <br>The default URL is https://january.revolt.chat/
+     * The URL used for the Proxy.
+     *
+     * <p>The URL is retrieved when connecting to the RevoltAPI for the first time and is https://january.revolt.chat
+     * for the default Revolt App.
      *
      * @return URL used for the proxy.
      */
     String getProxyUrl();
     
     /**
-     * Returns the URL used for the Voice Chat system.
-     * <br>The default URL is https://voso.revolt.chat/
+     * The URL used for the legacy Voice Chat system.
+     *
+     * <p>The URL is retrieved when connecting to the RevoltAPI for the first time and is https://voso.revolt.chat
+     * for the default Revolt App.
      *
      * @return URL used for Voice chat.
      */
@@ -55,7 +53,7 @@ public interface Revolt4J{
     
     /**
      * The current {@link Status Bot Status}.
-     * Events will only be fired when the status is {@link Status#CONNECTED CONNECTED}.
+     * <br>Certain actions such as retrieving Events may only work while the bot has a specific Status.
      * 
      * @return The current Status of the bot.
      */
@@ -65,5 +63,42 @@ public interface Revolt4J{
     
     void setStatus(Status status);
     
+    /**
+     * Adds Classes as event listeners to the bot.
+     * <br>Those classes may be used whenever specific events are retrieved and allow you to handle specific situations.
+     * 
+     * <p><b>Provided objects need to implement the {@link ch.andre601.revolt4j.api.event.BaseEvent BaseEvent interface}!</b>
+     * <br>The easiest way to do this is by extending them with the {@link ch.andre601.revolt4j.api.utils.event.InterfacedEventListener InterfacedEventListener}.
+     * 
+     * @param listeners
+     *        Array of objects to add as Event listeners.
+     */
     void addEventListeners(@NotNull Object... listeners);
+    
+    enum Status{
+        /**
+         * The Bot is starting up.
+         */
+        STARTING,
+        /**
+         * The bot connects to the Revolt API.
+         */
+        CONNECTING,
+        /**
+         * The bot is authenticating itself.
+         */
+        LOGIN,
+        /**
+         * The bot successfully established a connection and now retrieves Events.
+         */
+        CONNECTED,
+        /**
+         * The bot is disconnected from the websocket and may try to reconnect.
+         */
+        DISCONNECTED,
+        /**
+         * The bot connects to the websocket.
+         */
+        CONNECT_TO_WEBSOCKET
+    }
 }

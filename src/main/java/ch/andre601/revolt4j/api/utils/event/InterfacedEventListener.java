@@ -28,8 +28,8 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * An abstract class containing pre-made event methods for you to use.
- * <br>You need to <b>override</b> the methods you want to use in order for it to work.
+ * An abstract class containing pre-made event methods for your convenience.
+ * <br>You need to <b>extend this class</b> and <b>override</b> the methods you want to use in order for it to work.
  * 
  * <h2>Example</h2>
  * <pre><code>
@@ -43,10 +43,10 @@ import java.util.concurrent.ConcurrentHashMap;
  * </code></pre>
  * 
  * <h2>Copyright notice</h2>
- * This class is originally from JDA's ListenerAdabter:
+ * This class is based off the ListenerAdabter class from JDA:
  * <br>https://github.com/DV8FromTheWorld/JDA/blob/development/src/main/java/net/dv8tion/jda/api/hooks/ListenerAdapter.java
  * 
- * It does NOT fall under the default MIT license of this project and is under a completely separate License.
+ * <p>This class does NOT fall under the default MIT license of this project!
  * <br>Please see the LICENSE file of JDA for more details:
  * <br>https://github.com/DV8FromTheWorld/JDA/blob/development/LICENSE
  */

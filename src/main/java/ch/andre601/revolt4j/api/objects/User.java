@@ -39,9 +39,24 @@ public interface User extends Snowflake, Mentionable{
     @NotNull
     String getAvatarUrl();
     
+    /**
+     * The {@link Badge badges} the user can have.
+     * <br>This may return an empty EnumSet when the user doesn't have any badges.
+     * 
+     * @return Not-null, possibly-empty EnumSet containing all the Badges the user currently has.
+     */
     @NotNull
     EnumSet<Badge> getBadges();
     
+    /**
+     * Returns the raw integer value corresponding to this user.
+     * <br>You can use {@link Badge#getBadges(int) Badge.getBadges(getBadgesRaw())} or the dedicated
+     * {@link #getBadges() getBadges() method} of this interface to get an EnumSet of the user's badges.
+     * 
+     * @return Integer representing the raw value of the user's badges or 0 if no Badges are available.
+     * 
+     * @see #getBadges() EnumSet&lt;Badge&gt;: getBadges()
+     */
     int getBadgesRaw();
     
     /**
@@ -62,13 +77,38 @@ public interface User extends Snowflake, Mentionable{
     @NotNull
     Relationship getRelationship();
     
+    /**
+     * Will return true or false depending on if the user is currently online or not.
+     * 
+     * @return Whether this user is online.
+     */
     boolean isOnline();
     
+    /**
+     * The {@link Flag flags} the user may have.
+     * <br>Flags indicate a specific state of the user's account and can influence the availability of certain
+     * values. This may return an empty EnumSet if the user doesn't have any flags.
+     * 
+     * @return Not-null, possibly-empty EnumSet containing all the flags the user currently has.
+     */
     @NotNull
     EnumSet<Flag> getFlags();
     
+    /**
+     * Gets the raw integer value representing the current flags of the user.
+     * <br>You can use {@link Flag#getFlags(int) Flag.getFlags(getFlagsRaw())} or the dedicated
+     * {@link #getFlags() getFlags() method} of this interface to get an EnumSet of the user's flags.
+     * 
+     * @return Integer representing the raw value of the user's flags or 0 if no flags are set.
+     * 
+     * @see #getFlags() EnumSet&lt;Flag&gt;: getFlags()
+     */
     int getFlagsRaw();
     
+    /**
+     * The avatar of the User.
+     * <br>The avatar will have a unique ID and
+     */
     interface Avatar extends BaseFile{
     
         /**

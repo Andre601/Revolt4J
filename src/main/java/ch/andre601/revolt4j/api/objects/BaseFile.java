@@ -78,7 +78,7 @@ public interface BaseFile extends Snowflake{
     @NotNull
     String getContentType();
     
-    public enum Tag {
+    enum Tag {
         ATTACHMENTS,
         AVATARS,
         BACKGROUNDS,

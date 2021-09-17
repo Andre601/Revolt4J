@@ -23,3 +23,7 @@ If you want to help, consider making Pull requests to the project to get it in a
 Inspired by (And probably with some code of) [JDA].
 
 Credits and proper Licenses are set where needed.
+
+## Links
+
+- Revolt Server: https://app.revolt.chat/invite/5m0Gnyk3

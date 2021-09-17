@@ -29,7 +29,4 @@ public interface BaseEvent{
     
     @NotNull
     Revolt4J getRevolt4J();
-    
-    @NotNull
-    JSONObject getJson();
 }

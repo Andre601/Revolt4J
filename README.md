@@ -6,23 +6,24 @@ Revolt4J is a Java wrapper for the [Revolt App][revolt].
 
 It was heavily influenced by [JDA] and tries to support the Revolt API as good as it can while also being efficient.
 
-## NOTE
-**This Java wrapper is NOT in a ready state!**
+## Current Status
+**Revolt4J is NOT in a ready state as of now! (Last updated: 17.09.2021)**
 
-It still needs a lot of work and since I don't have *ANY* knowledge regarding Websockets and similar is this a hard thing to achieve.  
-If you want to help, consider making Pull requests to the project to get it in a somewhat ready state.
+The Wrapper still lacks a lot of necessary features to make it functional on at least a basic level.  
+If you're up to the challenge can you try to PR some changes to the wrapper. Any help is welcome as this is my first time working on such a project in such a scale.
 
-### Current plans/Goals
+## Current plans/Goals
 
-- Fully implement websocket system
-- Make a Caching mechanic to not always request information from the Revolt API.
-- Implement a system similar to JDA's RestAction, allowing to delay future requests without ratelimit encounters.
-- Some other stuff I can't think of right now...
+- Fully working Websocket system to communicate properly with the Revolt API.
+- Support all available Events Revolt currently has.
+- Caching-System to keep entities such as users and reduce API calls.
+- Rest action system similar to JDAs allowing for execution of methods without worrying to encounter rate limits (unintentionally).
+- Some other stuff that I can't remember but that are important somehow...
 
 ## Credits
-Inspired by (And probably with some code of) [JDA].
+Inspired by (and with code from) [JDA].
 
-Credits and proper Licenses are set where needed.
+Credits and proper Licenses are set where required.
 
 ## Links
 

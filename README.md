@@ -1,8 +1,19 @@
 [revolt]: https://revolt.chat
 [jda]: https://github.com/DV8FromTheWorld/JDA
 
+[serverBadge]: https://raw.githubusercontent.com/Andre601/Revolt4J/master/.assets/badges/revolt_server.svg
+[licenseBadge]: https://raw.githubusercontent.com/Andre601/Revolt4J/master/.assets/badges/license.svg
+
+[server]: https://app.revolt.chat/invite/5m0Gnyk3
+[license]: https://github.com/Andre601/Revolt4J/blob/master/LICENSE
+
+<img alt="revolt4j_logo" align="right" src="https://raw.githubusercontent.com/Andre601/Revolt4J/master/.assets/logo/revolt4j.png" height="200" width="200">
+
 # Revolt4J
-Revolt4J is a Java wrapper for the [Revolt App][revolt].
+
+[![serverBadge]][server] [![licenseBadge]][license]
+
+Revolt4J is a Java Wrapper for [revolt.chat][revolt] an open source Text and VOIP Service.
 
 It was heavily influenced by [JDA] and tries to support the Revolt API as good as it can while also being efficient.
 

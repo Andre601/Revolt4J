@@ -2,28 +2,23 @@ package ch.andre601.revolt4j.internal.utils;
 
 import org.json.JSONObject;
 
-public class JSONHelper{
+public enum JSONHelper{
+    AUTHENTICATE("Authenticate"),
+    BEGIN_TYPING("BeginTyping"),
+    END_TYPING("EndTyping"),
+    PING("Ping");
     
-    private JSONHelper(){}
+    private final String type;
     
-    public static JSONObject getJSON(RequestType type){
-        return new JSONObject().put("type", type.getType());
+    JSONHelper(String type){
+        this.type = type;
     }
     
-    public enum RequestType{
-        AUTHENTICATE("Authenticate"),
-        BEGIN_TYPING("BeginTyping"),
-        END_TYPING("EndTyping"),
-        PING("Ping");
-        
-        private final String type;
-        
-        RequestType(String type){
-            this.type = type;
-        }
-        
-        public String getType(){
-            return type;
-        }
+    public JSONObject getAsJSON(){
+        return new JSONObject().put("type", getType());
+    }
+    
+    private String getType(){
+        return type;
     }
 }

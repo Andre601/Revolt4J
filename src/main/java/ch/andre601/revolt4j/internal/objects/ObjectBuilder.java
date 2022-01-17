@@ -1,8 +1,12 @@
 package ch.andre601.revolt4j.internal.objects;
 
 import ch.andre601.revolt4j.api.Revolt4J;
+import ch.andre601.revolt4j.api.objects.message.BaseFile;
 import ch.andre601.revolt4j.api.objects.User;
+import ch.andre601.revolt4j.api.objects.message.TextEmbed;
 import ch.andre601.revolt4j.internal.Revolt4JImpl;
+import ch.andre601.revolt4j.internal.objects.message.BaseFileImpl;
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
 
 import java.util.Map;
@@ -19,7 +23,7 @@ public class ObjectBuilder{
         return api;
     }
     
-    public User createUser(JSONObject json){
+    public User createUser(@NotNull JSONObject json){
         final String id = json.getString("_id");
         final String username = json.getString("username");
         
@@ -56,5 +60,26 @@ public class ObjectBuilder{
             .setRelationship(relationship)
             .setOnline(online)
             .setFlags(flags);
+    }
+    
+    public BaseFile createFile(@NotNull JSONObject json){
+        final String id = json.getString("_id");
+        
+        final BaseFile.Tag tag = BaseFile.Tag.getFromString(json.getString("tag"));
+        final int size = json.getInt("size");
+        final String filename = json.getString("filename");
+        final Map<String, Object> metadata = json.getJSONObject("metadata").toMap();
+        final String contentType = json.getString("contentType");
+        
+        return new BaseFileImpl(getRevolt4J(), id)
+            .setTag(tag)
+            .setSize(size)
+            .setFilename(filename)
+            .setMetadata(metadata)
+            .setContentType(contentType);
+    }
+    
+    public static TextEmbed createTextEmbed(String iconUrl, String url, String title, String description, String media, String colour){
+        return new TextEmbed(iconUrl, url, title, description, media, colour);
     }
 }

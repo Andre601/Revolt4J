@@ -1,11 +1,11 @@
 package ch.andre601.revolt4j.internal.objects.message;
 
 import ch.andre601.revolt4j.api.Revolt4J;
-import ch.andre601.revolt4j.api.objects.BaseFile;
+import ch.andre601.revolt4j.api.objects.message.BaseFile;
 import ch.andre601.revolt4j.internal.Revolt4JImpl;
 import org.jetbrains.annotations.NotNull;
-import org.json.JSONObject;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class BaseFileImpl implements BaseFile{
@@ -13,26 +13,25 @@ public class BaseFileImpl implements BaseFile{
     protected final Revolt4JImpl api;
     
     protected final String id;
-    protected final Tag tag;
-    protected final int size;
-    protected String fileName;
-    protected final Map<String, Object> metadata;
-    protected final String contentType;
+    protected Tag tag = Tag.UNKNOWN;
+    protected int size = 0;
+    protected String fileName = "unknown";
+    protected Map<String, Object> metadata = new HashMap<>();
+    protected String contentType = "unknown";
     
-    public BaseFileImpl(@NotNull Revolt4JImpl api, @NotNull JSONObject json){
+    public BaseFileImpl(@NotNull Revolt4JImpl api, @NotNull String id){
         this.api = api;
-        
-        this.id = json.getString("_id");
-        this.tag = Tag.getFromString(json.getString("tag"));
-        this.size = json.getInt("size");
-        this.fileName = json.getString("filename");
-        this.metadata = json.getJSONObject("metadata").toMap();
-        this.contentType = json.getString("content_type");
+        this.id = id;
     }
     
     @Override
     public @NotNull Revolt4J getRevolt4J(){
         return api;
+    }
+    
+    @Override
+    public @NotNull String getId(){
+        return id;
     }
     
     @Override
@@ -63,8 +62,30 @@ public class BaseFileImpl implements BaseFile{
         return contentType;
     }
     
-    @Override
-    public @NotNull String getId(){
-        return id;
+    public BaseFileImpl setTag(@NotNull Tag tag){
+        this.tag = tag;
+        return this;
     }
+    
+    public BaseFileImpl setSize(int size){
+        this.size = size;
+        return this;
+    }
+    
+    public BaseFileImpl setFilename(@NotNull String fileName){
+        this.fileName = fileName;
+        return this;
+    }
+    
+    public BaseFileImpl setMetadata(@NotNull Map<String, Object> metadata){
+        this.metadata = metadata;
+        return this;
+    }
+    
+    public BaseFileImpl setContentType(@NotNull String contentType){
+        this.contentType = contentType;
+        return this;
+    }
+    
+    
 }

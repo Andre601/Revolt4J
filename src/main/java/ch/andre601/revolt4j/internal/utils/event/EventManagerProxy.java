@@ -11,7 +11,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.RejectedExecutionException;
 
 /*
- * Evenet Manager class adobted from JDA:
+ * Event Manager class adopted from JDA:
  * https://github.com/DV8FromTheWorld/JDA/blob/development/src/main/java/net/dv8tion/jda/internal/hooks/EventManagerProxy.java
  *
  * This class does not fall under the default MIT license!

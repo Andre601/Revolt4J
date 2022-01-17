@@ -1,5 +1,6 @@
 package ch.andre601.revolt4j.api.objects;
 
+import ch.andre601.revolt4j.api.objects.message.BaseFile;
 import ch.andre601.revolt4j.api.objects.properties.Mentionable;
 import ch.andre601.revolt4j.api.objects.properties.Snowflake;
 import org.jetbrains.annotations.NotNull;
@@ -11,6 +12,22 @@ import java.util.EnumSet;
  * Interface representing a Revolt User.
  */
 public interface User extends Snowflake, Mentionable{
+    
+    /**
+     * {@inheritDoc}
+     * 
+     * @return ID of the user.
+     */
+    @Override
+    @NotNull String getId();
+    
+    /**
+     * {@inheritDoc}
+     * 
+     * @return The mention for this user.
+     */
+    @Override
+    @NotNull String getAsMention();
     
     /**
      * The Displayed name of the user.
@@ -31,7 +48,7 @@ public interface User extends Snowflake, Mentionable{
     Avatar getAvatar();
     
     /**
-     * Convenience method to directly get the avatar.
+     * Convenience method to directly get the URL of the User's avatar.
      * <br>This is equal to doing  <code>{@link #getAvatar()}.getUrl()</code>
      * 
      * @return The URL for the User's avatar.
@@ -49,7 +66,7 @@ public interface User extends Snowflake, Mentionable{
     EnumSet<Badge> getBadges();
     
     /**
-     * Returns the raw integer value corresponding to this user.
+     * Returns the raw integer value corresponding to this user's badges.
      * <br>You can use {@link Badge#getBadges(int) Badge.getBadges(getBadgesRaw())} or the dedicated
      * {@link #getBadges() getBadges() method} of this interface to get an EnumSet of the user's badges.
      * 
@@ -61,7 +78,7 @@ public interface User extends Snowflake, Mentionable{
     
     /**
      * The current {@link Status status} of the user.
-     * <br>The status can contain a {@link Status#getText() custom text} that is displayed as the user's presence.
+     * <br>The status may contain a {@link Status#getText() custom text} that is displayed as the user's presence.
      *
      * @return Not-null instance of the user's status.
      */
@@ -107,7 +124,7 @@ public interface User extends Snowflake, Mentionable{
     
     /**
      * The avatar of the User.
-     * <br>The avatar will have a unique ID and
+     * <br>The avatar will have a unique ID and also a URL.
      */
     interface Avatar extends BaseFile{
     
@@ -128,6 +145,9 @@ public interface User extends Snowflake, Mentionable{
         String getUrl();
     }
     
+    /**
+     * The current status/presence the user has. May have a custom text if the user set one.
+     */
     interface Status{
     
         /**
@@ -141,7 +161,7 @@ public interface User extends Snowflake, Mentionable{
     
         /**
          * The type of {@link PresenceType presence} a user can have.
-         * <br>This may return {@link PresenceType#UNKNOWN UNKNOWN} if a unknown presence was set.
+         * <br>This may return {@link PresenceType#UNKNOWN UNKNOWN} if an unknown presence was set.
          * 
          * @return PresenceType instance representing the current status of the user.
          */
@@ -149,14 +169,42 @@ public interface User extends Snowflake, Mentionable{
         PresenceType getPresence();
     }
     
+    /**
+     * Enum containing possible badges a user can have.
+     * 
+     * <p>Use {@link User#getBadges() User.getBadges()} for an EnumSet of the user's badges or
+     * {@link User#getBadgesRaw() User.getBadgesRaw()} for the raw integer value instead.
+     */
     enum Badge{
-        DEVELOPER(0, "Developer"),
-        TRANSLATOR(1, "Translator"),
-        SUPPORTER(2, "Supporter"),
+        /**
+         * User is a developer for the Revolt application.
+         */
+        DEVELOPER             (0, "Developer"),
+        /**
+         * User has translated a significant portion of the Revolt app into another language.
+         */
+        TRANSLATOR            (1, "Translator"),
+        /**
+         * User donated to the devs of Revolt.
+         */
+        SUPPORTER             (2, "Supporter"),
+        /**
+         * TODO: Find out what this means.
+         */
         RESPONSIBLE_DISCLOSURE(3, "Responsible Disclosure"),
-        REVOLT_TEAM(4, "Revolt Staff"),
-        EARLY_ADOBTER(8, "Early Adobter"),
-        
+        /**
+         * User is a member of the Revolt team.
+         */
+        REVOLT_TEAM           (4, "Revolt Staff"),
+        /**
+         * User was one of the very first users using Revolt.
+         */
+        EARLY_ADOBTER         (8, "Early Adobter"),
+    
+        /**
+         * An unknown badge the user has. If this is returned does it mean that Revolt has a new badge not yet known
+         * by Revolt4J.
+         */
         UNKNOWN(-1, "Unknown");
         
         private final int offset;
@@ -168,7 +216,12 @@ public interface User extends Snowflake, Mentionable{
             this.raw = 1 << offset;
             this.name = name;
         }
-        
+    
+        /**
+         * Get the name of the badge as used by the Revolt client.
+         * 
+         * @return The name of the badge as displayed in the Revolt client.
+         */
         @NotNull
         public String getName(){
             return name;
@@ -181,7 +234,16 @@ public interface User extends Snowflake, Mentionable{
         public int getRaw(){
             return raw;
         }
-        
+    
+        /**
+         * Get a Badge from the provided offset value.
+         * 
+         * @param  offset
+         *         The offset to get a badge from.
+         * 
+         * @return The Badge matching the provided offset, or {@link #UNKNOWN UNKNOWN} if no known badge is found.
+         */
+        @NotNull
         public static Badge getFromOffset(int offset){
             for(Badge badge : values()){
                 if(badge.offset == offset)
@@ -190,7 +252,15 @@ public interface User extends Snowflake, Mentionable{
             
             return UNKNOWN;
         }
-        
+    
+        /**
+         * Gets an EnumSet of badges matching the provided raw bitfield value.
+         * 
+         * @param  badges
+         *         Raw bitfield representing the set of badges to get.
+         * 
+         * @return Not-null, possibly empty EnumSet containing Badges matching the provided bitfield.
+         */
         @NotNull
         public static EnumSet<Badge> getBadges(int badges){
             final EnumSet<Badge> foundBadges = EnumSet.noneOf(Badge.class);
@@ -209,9 +279,9 @@ public interface User extends Snowflake, Mentionable{
     
     /**
      * The current relationship a user has.
-     * <br>The relationship listed here is <b>always</b> in comparison with the bot.
+     * <br>The relationship listed here is <b>always</b> in comparison with the used account.
      * <br>This means that a relationship of {@link Relationship#BLOCKED BLOCKED} means that the user has
-     * blocked the bot.
+     * blocked the account you use Revolt4J on.
      */
     enum Relationship{
         /**
@@ -245,6 +315,7 @@ public interface User extends Snowflake, Mentionable{
         
         Relationship(){}
         
+        @NotNull
         public static Relationship getFromString(String relationshipName){
             for(Relationship relationship : values()){
                 if(relationship.name().equalsIgnoreCase(relationshipName))
@@ -291,7 +362,7 @@ public interface User extends Snowflake, Mentionable{
         BANNED(2, "Banned"),
     
         /**
-         * A unknown flag is set for this user. This <i>should</i> never appear unless Revolt adds a new flag.
+         * An unknown flag is set for this user. This <i>should</i> never appear unless Revolt adds a new flag.
          */
         UNKNOWN(-1, "Unknown");
         

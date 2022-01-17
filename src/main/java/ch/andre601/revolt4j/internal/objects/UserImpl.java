@@ -23,7 +23,6 @@ public class UserImpl implements User{
     
     public UserImpl(Revolt4J api, String id){
         this.api = api;
-        
         this.id = id;
     }
     
@@ -135,19 +134,16 @@ public class UserImpl implements User{
         
         public AvatarImpl(Revolt4J api, String id){
             this.api = api;
-            
             this.id = id;
         }
         
         @Override
-        @NotNull
-        public String getId(){
+        public @NotNull String getId(){
             return id;
         }
     
         @Override
-        @NotNull
-        public String getUrl(){
+        public @NotNull String getUrl(){
             return api.getFileUrl() + "/avatars/" + getId();
         }
     

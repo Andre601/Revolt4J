@@ -1,4 +1,4 @@
-package ch.andre601.revolt4j.api.objects;
+package ch.andre601.revolt4j.api.objects.message;
 
 import ch.andre601.revolt4j.api.Revolt4J;
 import ch.andre601.revolt4j.api.objects.properties.Snowflake;

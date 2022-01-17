@@ -1,7 +1,9 @@
 package ch.andre601.revolt4j.internal;
 
 import ch.andre601.revolt4j.api.Revolt4J;
+import ch.andre601.revolt4j.api.utils.event.InterfacedEventManager;
 import ch.andre601.revolt4j.internal.utils.AuthConfig;
+import ch.andre601.revolt4j.internal.utils.event.EventManagerProxy;
 import ch.andre601.revolt4j.internal.utils.logging.Revolt4JLogger;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
@@ -11,6 +13,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executors;
 
 public class Revolt4JImpl implements Revolt4J{
     
@@ -27,9 +30,11 @@ public class Revolt4JImpl implements Revolt4J{
     
     protected final AuthConfig authConfig;
     protected WebsocketHandler handler;
+    protected final EventManagerProxy eventManager;
     
     public Revolt4JImpl(AuthConfig authConfig){
         this.authConfig = authConfig;
+        this.eventManager = new EventManagerProxy(new InterfacedEventManager(), Executors.newSingleThreadScheduledExecutor());
     }
     
     @Override
@@ -73,8 +78,9 @@ public class Revolt4JImpl implements Revolt4J{
     }
     
     @Override
-    public void addEventListeners(@NotNull Object... listsners){
-        
+    public void addEventListeners(@NotNull Object... listeners){
+        for(Object listener : listeners)
+            eventManager.register(listener);
     }
     
     public Revolt4JImpl setWebsocketUrl(String websocketUrl){

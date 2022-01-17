@@ -8,6 +8,8 @@
 [server]: https://app.revolt.chat/invite/5m0Gnyk3
 [license]: https://github.com/Andre601/Revolt4J/blob/master/LICENSE
 
+[jda-license]: https://github.com/DV8FromTheWorld/JDA/blob/master/LICENSE
+
 <img alt="revolt4j_logo" align="right" src="https://raw.githubusercontent.com/Andre601/Revolt4J/master/.assets/logo/revolt4j.png" height="200" width="200">
 
 # Revolt4J

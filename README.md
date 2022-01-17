@@ -19,7 +19,7 @@ Revolt4J is a Java Wrapper for [revolt.chat][revolt] an open source Text and VOI
 It was heavily influenced by [JDA] and tries to support the Revolt API as good as it can while also being efficient.
 
 ## Current Status
-**Revolt4J is NOT in a ready state as of now! (Last updated: 17.09.2021)**
+**Revolt4J is NOT in a ready state as of now! (Last updated: 17.01.2022)**
 
 The Wrapper still lacks a lot of necessary features to make it functional on at least a basic level.  
 If you're up to the challenge can you try to PR some changes to the wrapper. Any help is welcome as this is my first time working on such a project in such a scale.

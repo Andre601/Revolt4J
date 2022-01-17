@@ -12,7 +12,7 @@
 
 # Revolt4J
 
-[![serverBadge]][server] [![licenseBadge]](#about-licesnes)
+[![serverBadge]][server] [![licenseBadge]](#about-licenses)
 
 Revolt4J is a Java Wrapper for [revolt.chat][revolt] an open source Text and VOIP Service.
 

@@ -6,6 +6,7 @@ import ch.andre601.revolt4j.api.objects.User;
 import ch.andre601.revolt4j.api.objects.message.TextEmbed;
 import ch.andre601.revolt4j.internal.Revolt4JImpl;
 import ch.andre601.revolt4j.internal.objects.message.BaseFileImpl;
+import ch.andre601.revolt4j.internal.objects.message.TextEmbedImpl;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
 
@@ -80,6 +81,6 @@ public class ObjectBuilder{
     }
     
     public static TextEmbed createTextEmbed(String iconUrl, String url, String title, String description, String media, String colour){
-        return new TextEmbed(iconUrl, url, title, description, media, colour);
+        return new TextEmbedImpl(iconUrl, url, title, description, media, colour);
     }
 }

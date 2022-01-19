@@ -1,50 +1,64 @@
 package ch.andre601.revolt4j.api.objects.message;
 
-public class TextEmbed{
+import org.jetbrains.annotations.Nullable;
+
+/**
+ * Represents an instance of an embed of the type text.
+ * 
+ * <p>This object cannot be altered. You have to use
+ * {@link ch.andre601.revolt4j.api.objects.message.TextEmbedBuilder#fromTextEmbed(TextEmbed) TextEmbedBuilder.fromTextEmbed(TextEmbed)}
+ * to create a copy that can be edited.
+ */
+public interface TextEmbed{
     
-    public static final String EMBED_TYPE = "text";
+    /**
+     * The embed type.
+     * 
+     * @return Always {@code text} for this embed type.
+     */
+    @Nullable String getType();
     
-    protected final String iconUrl;
-    protected final String url;
-    protected final String title;
-    protected final String description;
-    protected final String media;
-    protected final String colour;
+    /**
+     * The currently set icon URL this embed may have.
+     * 
+     * @return Possibly-null String representing the icon URL of the embed.
+     */
+    @Nullable String getIconUrl();
     
-    public TextEmbed(String iconUrl, String url, String title, String description, String media, String colour){
-        this.iconUrl = iconUrl;
-        this.url = url;
-        this.title = title;
-        this.description = description;
-        this.media = media;
-        this.colour = colour;
-    }
+    /**
+     * The currently set URL this embed may have for the title.
+     *
+     * @return Possibly-null String representing the URL of the embed.
+     */
+    @Nullable String getUrl();
     
-    public String getType(){
-        return EMBED_TYPE;
-    }
+    /**
+     * The currently set title this embed may have.
+     *
+     * @return Possibly-null String representing the title of the embed.
+     */
+    @Nullable String getTitle();
     
-    public String getIconUrl(){
-        return iconUrl;
-    }
+    /**
+     * The currently set description this embed may have.
+     *
+     * @return Possibly-null String representing the description of the embed.
+     */
+    @Nullable String getDescription();
     
-    public String getUrl(){
-        return url;
-    }
+    /**
+     * The currently set media ID this embed may have.
+     * <br>The ID is a unique one from a file or attachment on Revolt.
+     *
+     * @return Possibly-null String representing the media ID of the embed.
+     */
+    @Nullable String getMedia();
     
-    public String getTitle(){
-        return title;
-    }
+    /**
+     * The currently set colour this embed may have.
+     *
+     * @return Possibly-null String representing the colour of the embed.
+     */
+    @Nullable String getColour();
     
-    public String getDescription(){
-        return description;
-    }
-    
-    public String getMedia(){
-        return media;
-    }
-    
-    public String getColour(){
-        return colour;
-    }
 }

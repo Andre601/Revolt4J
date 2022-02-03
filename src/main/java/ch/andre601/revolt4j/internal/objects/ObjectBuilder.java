@@ -63,7 +63,7 @@ public class ObjectBuilder{
             .setFlags(flags);
     }
     
-    public BaseFile createFile(@NotNull JSONObject json){
+    public BaseFile createBaseFile(@NotNull JSONObject json){
         final String id = json.getString("_id");
         
         final BaseFile.Tag tag = BaseFile.Tag.getFromString(json.getString("tag"));

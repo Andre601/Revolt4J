@@ -2,6 +2,9 @@ package ch.andre601.revolt4j.api;
 
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * The main Revolt4J interface containg most if not all required features.
+ */
 public interface Revolt4J{
     
     /**

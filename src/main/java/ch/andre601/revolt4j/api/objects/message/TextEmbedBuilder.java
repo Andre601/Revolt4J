@@ -5,7 +5,11 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * Convenience class to build an instance of the {@link ch.andre601.revolt4j.api.objects.message.TextEmbed TextEmbed}.
+ * Builder class used to create an instance of a {@link ch.andre601.revolt4j.api.objects.message.TextEmbed TextEmbed}.
+ * <br>TextEmbeds are <b>read only</b> by the API, so this class is required to build a new instance to send.
+ * 
+ * <p>A {@link #fromTextEmbed(TextEmbed) fromTextEmbed(TextEmbed)} method exists for your convenience, to create a new
+ * TextEmbedBuilder instance from an already existing TextEmbed.
  */
 public class TextEmbedBuilder{
     
@@ -13,15 +17,18 @@ public class TextEmbedBuilder{
     
     public static final String TEXT_EMBED_TYPE = "text";
     
-    private String iconUrl;
-    private String url;
-    private String title;
-    private String description;
-    private String media;
-    private String colour;
+    private String iconUrl = null;
+    private String url = null;
+    private String title = null;
+    private String description = null;
+    private String media = null;
+    private String colour = null;
     
     /**
      * Creates a new, blank TextEmbedBuilder to use for creating new {@link ch.andre601.revolt4j.api.objects.message.TextEmbed TextEmbeds}.
+     * 
+     * <p>{@link #build() Building} this Builder instance without setting any values will result in a completely
+     * blank TextEmbed.
      */
     public TextEmbedBuilder(){}
     
@@ -100,7 +107,7 @@ public class TextEmbedBuilder{
     
     /**
      * Sets the file to use in the embed.
-     * <br>The value needs to be a valid file (attachment) ID.
+     * <br>The value needs to be a valid file/attachment ID.
      * 
      * @param  media
      *         ID of the file/attachment to display in the embed.
@@ -114,6 +121,16 @@ public class TextEmbedBuilder{
     
     /**
      * Sets the colour to display on the left side of the embed.
+     * 
+     * <p>The embed colour can be <b>any valid CSS value</b> available. Some examples:
+     * <ul>
+     *     <li>{@code #rrggbb} - HEX value</li>
+     *     <li>{@code #rrggbbaa} - HEX value (With alpha)</li>
+     *     <li>{@code rgb(r,g,b)} - RGB value</li>
+     *     <li>{@code rgba(r,g,b,a)} - RGBA value</li>
+     *     <li>{@code hsa(h,s,a)} - HSA value</li>
+     *     <li>{@code red} - pre-defined colour name (<a href="https://www.htmlcsscolor.com/html-color-names" target="_blank">List</a>)</li>
+     * </ul>
      * 
      * @param  colour
      *         The colour to set for the embed.
@@ -147,23 +164,8 @@ public class TextEmbedBuilder{
      * that can be added to a {@link ch.andre601.revolt4j.api.objects.message.BaseMessage BaseMessage}.
      * 
      * @return Usable {@link ch.andre601.revolt4j.api.objects.message.TextEmbed TextEmbed} instance.
-     * 
-     * @throws java.lang.IllegalStateException
-     *         When the TextEmbedBuilder is empty. This means, all values are {@link null}
      */
     public TextEmbed build(){
-        if(isEmpty())
-            throw new IllegalStateException("TextEmbed may not be empty!");
-        
         return ObjectBuilder.createTextEmbed(iconUrl, url, title, description, media, colour);
-    }
-    
-    private boolean isEmpty(){
-        return iconUrl == null &&
-            url == null &&
-            title == null &&
-            description == null &&
-            media == null &&
-            colour == null;
     }
 }
